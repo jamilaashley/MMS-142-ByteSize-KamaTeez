@@ -1,0 +1,266 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: #242021;
+    font-family: 'Nunito', sans-serif;
+}
+
+.hero {
+    width: 100%;
+    line-height: 0;
+}
+
+.hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.shop-section {
+    padding: 52px 5% 72px;
+    background: #242021;
+    color: #fff;
+    scroll-margin-top: 20px;
+}
+
+.shop-title {
+    margin: 0 0 32px;
+    color: #fff;
+    font-family: 'Freckle Face', cursive;
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    font-weight: 400;
+    text-align: center;
+}
+
+.shop-products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 1200px;
+    gap: 24px;
+    margin: 0 auto;
+}
+
+.recommended-product {
+    min-width: 0;
+}
+
+.recommended-image {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.recommended-product-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.recommended-image-outgoing {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.7s ease;
+}
+
+.recommended-image-outgoing.is-fading {
+    opacity: 0;
+}
+
+.recommended-product-info {
+    width: 90%;
+    padding-top: 16px;
+    margin: 0 auto;
+}
+
+.recommended-product-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    color: inherit;
+    text-decoration: none;
+}
+
+.recommended-product-title:hover h2 {
+    text-decoration: underline;
+}
+
+.recommended-product-title h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.recommended-product-title svg,
+.contact-link svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: #f583dd;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.recommended-product-price {
+    margin: 8px 0 0;
+    color: #f583dd;
+    font-size: 16px;
+}
+
+.recommended-colors {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.recommended-swatch {
+    display: block;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: 1px solid #fff;
+    appearance: none;
+    cursor: pointer;
+}
+
+.recommended-swatch.white {
+    background: #fff;
+}
+
+.recommended-swatch.black {
+    background: #000;
+}
+
+.recommended-swatch.khaki {
+    background: #e2c9b7;
+}
+
+.recommended-swatch[aria-pressed="true"] {
+    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #fff;
+}
+
+.recommended-swatch:focus-visible,
+.recommended-product-title:focus-visible,
+.contact-link:focus-visible {
+    outline: 2px solid #f583dd;
+    outline-offset: 4px;
+}
+
+.about-section {
+    padding: 72px 5%;
+    background: #cc3846;
+    color: #fff;
+    scroll-margin-top: 20px;
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(36px, 7vw, 88px);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-art {
+    display: flex;
+    justify-content: center;
+}
+
+.about-art img {
+    display: block;
+    width: min(100%, 480px);
+    height: auto;
+    object-fit: contain;
+}
+
+.about-copy h2 {
+    margin: 0 0 20px;
+    font-family: 'Freckle Face', cursive;
+    font-size: clamp(2.3rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.about-copy p {
+    margin: 0 0 18px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    color: #fff;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.contact-link svg {
+    stroke: currentColor;
+}
+
+@media (max-width: 760px) {
+    .shop-products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px 20px;
+    }
+
+    .about-section {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .about-art img {
+        width: min(100%, 380px);
+    }
+}
+
+@media (max-width: 540px) {
+    .shop-section {
+        padding: 44px 18px 56px;
+    }
+
+    .shop-products {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+    }
+
+    .about-section {
+        padding: 48px 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .recommended-image-outgoing {
+        transition-duration: 0.01ms;
+    }
+}
