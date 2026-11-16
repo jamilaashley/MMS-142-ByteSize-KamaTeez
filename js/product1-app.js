@@ -251,7 +251,7 @@ orderButton.addEventListener('click', () => {
 
     Thank you.`;
 
-const outlookLink = `https://outlook.live.com/mail/0/deeplink/compose?to=orders@examplewebsite142.com&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+const outlookLink = `https://outlook.live.com/mail/0/deeplink/compose?to=orders@kamateez.com&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     
     window.location.href = outlookLink;
 });
