@@ -513,8 +513,6 @@
     }
     .main-wrap .product .image-gallery img{
         display: block;
-        width: 100%;
-        height: auto;
     }
     .main-wrap .product .product-details{
         flex: 0 0 auto;
