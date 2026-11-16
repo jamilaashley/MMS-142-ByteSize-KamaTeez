@@ -5,6 +5,15 @@ const previousButton = document.querySelector( '.image-gallery .previous' );
 const nextButton = document.querySelector( '.image-gallery .next' );
 const colorInputs = document.querySelectorAll( '.select-color input[name="color"]' );
 const quantityInput = document.getElementById( 'quantity' );
+
+const orderButton = document.querySelector('.order-button');
+
+const selectedSize = document.querySelector('input[name="size"]:checked');
+const selectedColor = document.querySelector('input[name="color"]:checked');
+
+const productName = document.querySelector('.details h2').textContent;
+const productPrice = document.querySelector('.details h3').textContent;
+
 const decreaseQuantity = document.querySelector( '.quantity-decrease' );
 const increaseQuantity = document.querySelector( '.quantity-increase' );
 const shippingToggle = document.querySelector( '.shipping-toggle' );
@@ -213,3 +222,36 @@ function crossfadeRecommendedImage( product, productImage, imageSrc, imageAlt, s
 }
 
 showImage( currentImage );
+
+orderButton.addEventListener('click', () => {
+    
+    const selectedSize = document.querySelector('input[name="size"]:checked');
+    const selectedColor = document.querySelector('input[name="color"]:checked');
+
+    if (selectedSize === null || selectedColor === null) {
+        alert("Please select a size and color.");
+        return;
+    }
+
+    const size = selectedSize.id;
+    const color = selectedColor.id;
+    const quantity = quantityInput.value;
+
+    const emailSubject = `Order Request - ${productName}`;
+
+    const emailBody = `Hello!
+
+    This is my order details:
+
+    Product: ${productName}
+    Price: ${productPrice}
+    Color: ${color}
+    Size: ${size}
+    Quantity: ${quantity}
+
+    Thank you.`;
+
+const outlookLink = `https://outlook.live.com/mail/0/deeplink/compose?to=orders@examplewebsite142.com&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    window.location.href = outlookLink;
+});
