@@ -2,175 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KamaTeez</title>
-    <link rel="stylesheet" href="./css/product1-style.css">
+    <link rel="stylesheet" href="./css/privacy-policy-style.css">
 </head>
 <body>
-    <section class="main-wrap">
-        <div class="product">
-            <div class="image-gallery" data-images="./img/1.png,./img/2.png,./img/3.png,./img/4.png,./img/5.png,./img/6.png">
-                <img src="./img/1.png" id="productImg" alt="Product image 1">
-                <img src="./img/1.png" id="productImgNext" class="crossfade-image" alt="" aria-hidden="true">
-                <button class="carousel-arrow previous" type="button" aria-label="Previous image">&#10094;</button>
-                <button class="carousel-arrow next" type="button" aria-label="Next image">&#10095;</button>
-                <div class="controls" role="group" aria-label="Choose product image">
-                </div>
-            </div>
-            <div class="product-details">
-                <div class="details">
-                    <h2>Don't be late Tee</h2>
-                    <h3>₱499.00</h3>
-                </div>
-                <div class="colors">
-                    <form class="form">
-                        <div class="select-color">
-                            <label for="white">
-                                <input type="radio" name="color" id="white" data-image="4">
-                                <span class="color-1"></span>
-                            </label>
-                            <label for="black">
-                                <input type="radio" name="color" id="black" data-image="5">
-                                <span class="color-2"></span>
-                            </label>
-                            <label for="khaki">
-                                <input type="radio" name="color" id="khaki" data-image="6">
-                                <span class="color-3"></span>
-                            </label>
-                        </div>   
-                    </form>
-                </div>
-                <div class="sizes">
-                    <form class="form">
-                        <div class="select-size">
-                            <h3>Size</h3>
-                            <div class="size-options">
-                             <label for="xxsm">
-                                <input type="radio" name="size" id="xxsm">
-                                <span>XXS</span>
-                            </label>
-                             <label for="xsm">
-                                <input type="radio" name="size" id="xsm">
-                                <span>XS</span>
-                            </label>
-                            <label for="sm">
-                                <input type="radio" name="size" id="sm">
-                                <span>S</span>
-                            </label>
-                            <label for="m">
-                                <input type="radio" name="size" id="m">
-                                <span>M</span>
-                            </label>
-                            <label for="lg">
-                                <input type="radio" name="size" id="lg">
-                                <span>L</span>
-                            </label>
-                            <label for="xl">
-                                <input type="radio" name="size" id="xl">
-                                <span>XL</span>
-                            </label>
-                            <label for="xxl">
-                                <input type="radio" name="size" id="xxl">
-                                <span>XXL</span>
-                            </label>
-                            </div>
-                        </div>   
-                    </form>
-                
-                <div class="purchase-actions">
-                    <div class="quantity-stepper" aria-label="Quantity selector">
-                        <button class="quantity-decrease" type="button" aria-label="Decrease quantity">&minus;</button>
-                        <input id="quantity" type="number" name="quantity" min="1" value="1" aria-label="Quantity">
-                        <button class="quantity-increase" type="button" aria-label="Increase quantity">+</button>
-                    </div>
-                    <button class="order-button" type="button">
-                        <span>Order Now</span>
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M3 3h2l2.4 12.1a2 2 0 0 0 2 1.6h9.2a2 2 0 0 0 2-1.6L22 7H6"></path>
-                            <circle cx="10" cy="21" r="1"></circle>
-                            <circle cx="19" cy="21" r="1"></circle>
-                        </svg>
-                    </button>
-                </div>
-                <div class="shipping-dropdown">
-                    <button class="shipping-toggle" type="button" aria-expanded="false" aria-controls="shipping-information">
-                        <span class="shipping-label">Shipping &amp; Returns</span>
-                        <span class="shipping-chevron" aria-hidden="true"></span>
-                    </button>
-                    <div class="shipping-information" id="shipping-information" hidden>
-                        <p><strong class="shipping-heading">Shipping Information</strong><br>
-                            Processing time for orders take 1-2 business days. Once shipped, delivery within Metro Manila shall take 3-5 business days, while deliveries outside Metro Manila are expected to take 5-7 business days.
-                        </p>
-                        <p><strong class="shipping-heading">Returns and Exchanges</strong><br>
-                            Only items purchased from the official Kamateez store are eligible for return and exchange. Defective and/or damaged item(s) are eligible for exchange as long as it is unused and reported within 7 days of delivery.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="product-information" aria-label="Product information">
-        <div class="product-information-content">
-            <section class="information-block">
-                <h2>Product Details</h2>
-                <img src="./prod-details/1.png" alt="Product material, overview, and washing instructions">
+    <div class="button-layout">
+        <nav class="menu">
+            <a class="menu-button" href="#privacy-section">
+                <span class="menu-label">Privacy Policy</span>
+                <span class="plus-icon"> + </span>
+            </a>
+             <a class="menu-button" href="#handle-section">
+                <span class="menu-label">Handling Your Data</span>
+                <span class="plus-icon"> + </span>
+            </a>
+        </nav>
+    
+        <main class="content-panel">
+            <section class="section" id="privacy-section">
+                <h2>Privacy Policy</h2>
+                <p>KamaTeez is committed to keeping your personal information safe. Whenever you shop with us or use one of our services, you are trusting us with your details, and we take that trust seriously. Protecting your data and your privacy is our top priority.</p>
             </section>
-            <section class="information-block">
-                <h2>Sizes</h2>
-                <img src="./size-guide/1.png" alt="Size guide showing shoulder, width, and height measurements">
+            <section class="section" id="handle-section">
+                <h2> How Do We Handle Your Data?</h2>
+                <ul>
+                    <li>We tell you why we collect it. How we process your personal data depends on the reason it was collected, and we will always let you know what that reason is.</li>
+                    <li>We use it only to serve you better. We use your personal data only to give you a good experience, whether you visit our website or our physical stores. This includes handling the services you ask for, such as processing and delivering your order.</li>
+                    <li>We collect only what we need. The information we may process includes your name, address, email address, phone number, payment details, and order history.</li>
+                    <li>You stay in control. You have the right to access, correct, delete, and ask questions about your personal data. In certain situations, you may also object to how we use it.</li>
+                </ul>
+                <p>If you have any more questions or if you need further assistance, please contact our friendly customer service team through our email.</p>
+
+
             </section>
-        </div>
-    </section>
+        </main>
 
-    <section class="recommendations" aria-labelledby="recommendations-title">
-        <div class="recommendations-content">
-            <h2 id="recommendations-title">You May Also Like</h2>
-            <div class="recommended-products">
-                <article class="recommended-product">
-                    <a class="recommended-image" href="./product2.html">
-                        <img class="recommended-product-image" src="./img/7.png" alt="Everyday Comfort Tee" loading="lazy">
-                    </a>
-                    <div class="recommended-product-info">
-                        <a class="recommended-product-title" href="./product2.html">
-                            <h3>Everyday Comfort Tee</h3>
-                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </a>
-                        <p class="recommended-product-price">₱499.00</p>
-                        <div class="recommended-colors" role="group" aria-label="Available colors">
-                            <button class="recommended-swatch white" type="button" data-image="./img/10.png" data-color="White" aria-label="Show White Everyday Comfort Tee" aria-pressed="false"></button>
-                            <button class="recommended-swatch black" type="button" data-image="./img/11.png" data-color="Black" aria-label="Show Black Everyday Comfort Tee" aria-pressed="false"></button>
-                            <button class="recommended-swatch khaki" type="button" data-image="./img/12.png" data-color="Khaki" aria-label="Show Khaki Everyday Comfort Tee" aria-pressed="false"></button>
-                        </div>
-                    </div>
-                </article>
-                <article class="recommended-product">
-                    <a class="recommended-image" href="./product3.html">
-                        <img class="recommended-product-image" src="./img/13.png" alt="Do Good Work Tee" loading="lazy">
-                    </a>
-                    <div class="recommended-product-info">
-                        <a class="recommended-product-title" href="./product3.html">
-                            <h3>Do Good Work Tee</h3>
-                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </a>
-                        <p class="recommended-product-price">₱499.00</p>
-                        <div class="recommended-colors" role="group" aria-label="Available colors">
-                            <button class="recommended-swatch white" type="button" data-image="./img/16.png" data-color="White" aria-label="Show White Do Good Work Tee" aria-pressed="false"></button>
-                            <button class="recommended-swatch black" type="button" data-image="./img/17.png" data-color="Black" aria-label="Show Black Do Good Work Tee" aria-pressed="false"></button>
-                            <button class="recommended-swatch khaki" type="button" data-image="./img/18.png" data-color="Khaki" aria-label="Show Khaki Do Good Work Tee" aria-pressed="false"></button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <script src="./js/product1-app.js"></script>
+    </div>
 </body>
 </html>
