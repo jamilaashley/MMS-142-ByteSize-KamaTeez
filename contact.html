@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover KamaTeez graphic tees and learn about our art-inspired clothing brand.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX" crossorigin="anonymous">
+    <title>KamaTeez</title>
+    <link rel="stylesheet" href="./css/header-style.css">
+    <link rel="stylesheet" href="./css/contact-style.css">
+    <link rel="stylesheet" href="./css/footer-style.css">
+    <script src="js/mailto.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Main navigation">
+            <a class="brand" href="./index.html" aria-label="KamaTeez home">
+                <img class="brand-logo" src="./logo/main.svg" alt="">
+                <span>KamaTeez</span>
+            </a>
+            <ul class="navigation-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <div class="image-container">
+                <img src="./contact-icon/contact-icon.png" alt="Contact Illustration" class="contact-image">
+            </div>
+            
+            <div class="form-container">
+                <h1>We'd love to hear from you!</h1>
+                <p class="description">Have a question or general feedback? Please get in touch with us by filling up the form below. Thank you!</p>
+                
+                <form id="contact-form" class="contact-form" action="#" method="post">
+                    
+                    <div class="mb-3">
+                        <label for="full-name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="full-name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="topic" class="form-label">Subject</label>
+                        <select class="form-select" id="topic" aria-label="Subject select">
+                            <option value="A question about an order">A question about an order</option>
+                            <option value="A question about a product">A question about a product</option>
+                            <option value="Something else">Something else</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="footer-content">
+            <a class="footer-brand" href="./index.html" aria-label="KamaTeez home">
+                <img src="./logo/main.svg" alt="">
+                <span>KamaTeez</span>
+            </a>
+            <nav class="footer-column" aria-labelledby="footer-company-title">
+                <h2 id="footer-company-title">COMPANY</h2>
+                <ul>
+                    <li><a href="./index.html#home">Home</a></li>
+                    <li><a href="./index.html#about">About</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="./terms.html">Terms</a></li>
+                </ul>
+            </nav>
+            <nav class="footer-column" aria-labelledby="footer-shop-title">
+                <h2 id="footer-shop-title">SHOP</h2>
+                <ul>
+                    <li><a href="./product1.html">Don't be Late Tee</a></li>
+                    <li><a href="./product2.html">Everyday Comfort Tee</a></li>
+                    <li><a href="./product3.html">Do Good Work Tee</a></li>
+                </ul>
+                <a class="footer-shop-all" href="./index.html#shop">
+                    <span>Shop All</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 12h14M13 6l6 6-6 6"></path>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Kamateez. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="./js/home-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js" integrity="sha384-WyOxWvTyr1QaMPfiPJSv76iReVthorl5uWlFtZPyK0IEB0hGzo9y5Bp9mYanr8Bu" crossorigin="anonymous"></script>
+</body>
+</html>
