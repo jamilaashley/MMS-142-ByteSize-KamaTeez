@@ -61,3 +61,40 @@ main {
     background-color: #B5313E !important;
     border-color: #B5313E !important;
 }
+
+@media (max-width: 600px) {
+    main {
+        align-items: flex-start;
+        padding: 24px 16px;
+        min-height: unset;
+    }
+
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+    }
+
+    .image-container {
+        width: 100%;
+    }
+
+    .contact-image {
+        max-width: 220px;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .form-container h1 {
+        font-size: 20pt;
+        margin-bottom: 8px;
+    }
+
+    .description {
+        font-size: 11pt;
+        margin-bottom: 18px;
+    }
+}
