@@ -87,8 +87,8 @@ body {
     .navigation {
         width: min(100% - 32px, 1200px);
         min-height: 0;
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
+        flex-direction: row;
         gap: 8px;
         padding: 16px 0;
     }
