@@ -1,0 +1,63 @@
+body {
+    background-color: #242021;
+    color: #EFEFEF;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.main-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: 85%;
+}
+
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+}
+
+.form-container {
+    flex: 1;
+}
+
+.form-container h1 {
+    font-size: 30pt;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #CCCCCC;
+    font-size: 18pt;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Normal state */
+.btn-primary {
+    background-color: #CC3846;
+    border-color: #CC3846;
+}
+
+/* Hover state */
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #B5313E !important;
+    border-color: #B5313E !important;
+}
