@@ -5,15 +5,6 @@ const previousButton = document.querySelector( '.image-gallery .previous' );
 const nextButton = document.querySelector( '.image-gallery .next' );
 const colorInputs = document.querySelectorAll( '.select-color input[name="color"]' );
 const quantityInput = document.getElementById( 'quantity' );
-
-const orderButton = document.querySelector('.order-button');
-
-const selectedSize = document.querySelector('input[name="size"]:checked');
-const selectedColor = document.querySelector('input[name="color"]:checked');
-
-const productName = document.querySelector('.details h2').textContent;
-const productPrice = document.querySelector('.details h3').textContent;
-
 const decreaseQuantity = document.querySelector( '.quantity-decrease' );
 const increaseQuantity = document.querySelector( '.quantity-increase' );
 const shippingToggle = document.querySelector( '.shipping-toggle' );
@@ -223,35 +214,51 @@ function crossfadeRecommendedImage( product, productImage, imageSrc, imageAlt, s
 
 showImage( currentImage );
 
-orderButton.addEventListener('click', () => {
-    
+const TO_ADDRESS = "orders@kamateez.com";
+
+const orderButton = document.querySelector('.order-button');
+
+const productName = document.querySelector('.details h2').textContent;
+const productPrice = document.querySelector('.details h3').textContent;
+
+function buildOrderEmail() {
     const selectedSize = document.querySelector('input[name="size"]:checked');
     const selectedColor = document.querySelector('input[name="color"]:checked');
 
     if (selectedSize === null || selectedColor === null) {
         alert("Please select a size and color.");
-        return;
+        return null;
     }
 
     const size = selectedSize.id;
     const color = selectedColor.id;
     const quantity = quantityInput.value;
 
-    const emailSubject = `Order Request - ${productName}`;
+    const subject = "Order Request - " + productName;
 
-    const emailBody = `Hello!
+    const body =
+        "Hello!\r\n\r\n" +
+        "This is my order details:\r\n\r\n" +
+        "Product: " + productName + "\r\n" +
+        "Price: " + productPrice + "\r\n" +
+        "Color: " + color + "\r\n" +
+        "Size: " + size + "\r\n" +
+        "Quantity: " + quantity + "\r\n\r\n" +
+        "Thank you.";
 
-    This is my order details:
+    return (
+        "https://outlook.live.com/mail/0/deeplink/compose?to=" + TO_ADDRESS +
+        "&subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body)
+    );
+}
 
-    Product: ${productName}
-    Price: ${productPrice}
-    Color: ${color}
-    Size: ${size}
-    Quantity: ${quantity}
+orderButton.addEventListener('click', function () {
+    const emailLink = buildOrderEmail();
 
-    Thank you.`;
+    if (emailLink === null) {
+        return;
+    }
 
-const outlookLink = `https://outlook.live.com/mail/0/deeplink/compose?to=orders@kamateez.com&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    window.location.href = outlookLink;
+    window.location.href = emailLink;
 });
