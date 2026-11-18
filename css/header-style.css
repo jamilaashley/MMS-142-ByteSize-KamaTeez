@@ -135,6 +135,37 @@ body {
     outline-offset: 4px;
 }
 
+[data-color] {
+    position: relative;
+}
+
+[data-color]::after {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    z-index: 20;
+    padding: 5px 8px;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    background: #242021;
+    color: #fff;
+    content: attr(data-color);
+    font: 600 12px/1.2 'Nunito', sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    visibility: hidden;
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+[data-color]:hover::after,
+[data-color]:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    visibility: visible;
+}
+
 @media (max-width: 560px) {
     .navigation {
         width: min(100% - 32px, 1200px);
@@ -212,6 +243,10 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .navigation-links a {
+        transition: none;
+    }
+
+    [data-color]::after {
         transition: none;
     }
 }
