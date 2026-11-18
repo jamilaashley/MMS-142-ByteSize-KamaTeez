@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KamaTeez</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/header-style.css">
     <link rel="stylesheet" href="./css/product1-style.css">
     <link rel="stylesheet" href="./css/footer-style.css">
@@ -12,14 +13,14 @@
 <body>
     <header class="site-header">
         <nav class="navigation" aria-label="Main navigation">
-            <a class="brand" href="./index.html" aria-label="KamaTeez home">
+            <a class="brand" href="./home.html" aria-label="KamaTeez home">
                 <img class="brand-logo" src="./logo/main.svg" alt="">
                 <span>KamaTeez</span>
             </a>
             <ul class="navigation-links">
-                <li><a href="./index.html#home">Home</a></li>
-                <li><a href="./index.html#shop">Shop</a></li>
-                <li><a href="./index.html#about">About</a></li>
+                <li><a href="./home.html#home">Home</a></li>
+                <li><a href="./home.html#shop">Shop</a></li>
+                <li><a href="./home.html#about">About</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -28,8 +29,8 @@
     <section class="main-wrap">
         <div class="product">
             <div class="image-gallery" data-images="./img/1.png,./img/2.png,./img/3.png,./img/4.png,./img/5.png,./img/6.png">
-                <img src="./img/1.png" id="productImg" alt="Product image 1">
-                <img src="./img/1.png" id="productImgNext" class="crossfade-image" alt="" aria-hidden="true">
+                <img src="./img/1.png" id="productImg" class="img-fluid" alt="Product image 1">
+                <img src="./img/1.png" id="productImgNext" class="crossfade-image img-fluid" alt="" aria-hidden="true">
                 <button class="carousel-arrow previous" type="button" aria-label="Previous image">&#10094;</button>
                 <button class="carousel-arrow next" type="button" aria-label="Next image">&#10095;</button>
                 <div class="controls" role="group" aria-label="Choose product image">
@@ -133,11 +134,11 @@
         <div class="product-information-content">
             <section class="information-block">
                 <h2>Product Details</h2>
-                <img src="./prod-details/1.png" alt="Product material, overview, and washing instructions">
+                <img class="img-fluid" src="./prod-details/1.png" alt="Product material, overview, and washing instructions">
             </section>
             <section class="information-block">
                 <h2>Sizes</h2>
-                <img src="./size-guide/1.png" alt="Size guide showing shoulder, width, and height measurements">
+                <img class="img-fluid" src="./size-guide/1.png" alt="Size guide showing shoulder, width, and height measurements">
             </section>
         </div>
     </section>
@@ -148,7 +149,7 @@
             <div class="recommended-products">
                 <article class="recommended-product">
                     <a class="recommended-image" href="./product2.html">
-                        <img class="recommended-product-image" src="./img/7.png" alt="Everyday Comfort Tee" loading="lazy">
+                        <img class="recommended-product-image img-fluid" src="./img/7.png" alt="Everyday Comfort Tee" loading="lazy">
                     </a>
                     <div class="recommended-product-info">
                         <a class="recommended-product-title" href="./product2.html">
@@ -167,7 +168,7 @@
                 </article>
                 <article class="recommended-product">
                     <a class="recommended-image" href="./product3.html">
-                        <img class="recommended-product-image" src="./img/13.png" alt="Do Good Work Tee" loading="lazy">
+                        <img class="recommended-product-image img-fluid" src="./img/13.png" alt="Do Good Work Tee" loading="lazy">
                     </a>
                     <div class="recommended-product-info">
                         <a class="recommended-product-title" href="./product3.html">
@@ -190,18 +191,18 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <a class="footer-brand" href="./index.html" aria-label="KamaTeez home">
+            <a class="footer-brand" href="./home.html" aria-label="KamaTeez home">
                 <img src="./logo/main.svg" alt="">
                 <span>KamaTeez</span>
             </a>
             <nav class="footer-column" aria-labelledby="footer-company-title">
                 <h2 id="footer-company-title">COMPANY</h2>
                 <ul>
-                    <li><a href="./index.html#home">Home</a></li>
-                    <li><a href="./index.html#about">About</a></li>
+                    <li><a href="./home.html#home">Home</a></li>
+                    <li><a href="./home.html#about">About</a></li>
                     <li><a href="./contact.html">Contact</a></li>
                     <li><a href="./privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="./privacy-policy.html">Terms</a></li>
+                    <li><a href="./terms.html">Terms</a></li>
                 </ul>
             </nav>
             <nav class="footer-column" aria-labelledby="footer-shop-title">
@@ -211,7 +212,7 @@
                     <li><a href="./product2.html">Everyday Comfort Tee</a></li>
                     <li><a href="./product3.html">Do Good Work Tee</a></li>
                 </ul>
-                <a class="footer-shop-all" href="./index.html#shop">
+                <a class="footer-shop-all" href="./home.html#shop">
                     <span>Shop All</span>
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path d="M5 12h14M13 6l6 6-6 6"></path>
