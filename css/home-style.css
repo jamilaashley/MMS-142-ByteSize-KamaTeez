@@ -151,7 +151,7 @@ body {
 }
 
 .recommended-swatch[aria-pressed="true"] {
-    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #EFEFEF;
+    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #FFFFFF;
 }
 
 .recommended-swatch:focus-visible,
