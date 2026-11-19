@@ -65,14 +65,21 @@ body {
     list-style: none;
 }
 
-.navigation-links.dropdown-menu {
+.navigation-links.menu {
     display: flex;
+    flex-direction: row;
     position: static;
     width: auto;
+    opacity: 1;
+    transform: none;
     background: transparent;
     border: 0;
     border-radius: 0;
     box-shadow: none;
+}
+
+.navigation-links.menu .menu-item {
+    width: auto;
 }
 
 .menu-toggle {
@@ -192,9 +199,10 @@ body {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
+        transition: none;
     }
 
-    .navigation.menu-ready .navigation-links.dropdown-menu.show {
+    .navigation.menu-ready .navigation-links.menu.show {
         display: flex;
         position: absolute;
         top: calc(100% - 8px);
@@ -220,18 +228,18 @@ body {
         padding: 10px 12px;
     }
 
-    .navigation.menu-ready .navigation-links.dropdown-menu.show a {
+    .navigation.menu-ready .navigation-links.menu.show a {
         border-radius: 4px;
         text-decoration: none;
     }
 
-    .navigation.menu-ready .navigation-links.dropdown-menu.show a:hover,
-    .navigation.menu-ready .navigation-links.dropdown-menu.show a:focus-visible {
+    .navigation.menu-ready .navigation-links.menu.show a:hover,
+    .navigation.menu-ready .navigation-links.menu.show a:focus-visible {
         background: #cc3846;
         color: #fff;
     }
 
-    .navigation.menu-ready .navigation-links.dropdown-menu.show a:active {
+    .navigation.menu-ready .navigation-links.menu.show a:active {
         background: #b72b39;
     }
 
