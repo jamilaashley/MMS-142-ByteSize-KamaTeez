@@ -19,7 +19,6 @@ body {
     margin: 32px;
 }
 
-.menu,
 .policy-menu {
     display: flex;
     flex-direction: column;
@@ -102,7 +101,7 @@ body {
         margin: 16px;
     }
     
-    .menu,
+    
     .policy-menu {
         flex: none;
         width: 100%;
