@@ -9,7 +9,7 @@
 body {
     padding: 0;
     background-color:#242021;
-    color: #efefef;
+    color: #FFFFFF;
     line-height: 1.6;
 }
 
@@ -47,9 +47,9 @@ p {
     align-items: center;
     padding: 14px 16px;
     background: #cc3846;
-    color: #efefef;
+    color: #FFFFFF;
     border: none;
-    border-top: 1px solid #efefef;
+    border-top: 1px solid #FFFFFF;
     font-size: 16px;
     text-decoration: none;
 
@@ -82,7 +82,7 @@ p {
     scroll-behavior: smooth;
     padding: 20px;
     border-radius: 4px;
-    color: #efefef;
+    color: #FFFFFF;
 }
 
 .section {
