@@ -1,5 +1,5 @@
 document.querySelectorAll( '.navigation' ).forEach( navigation => {
-    const toggle = navigation.querySelector( '.menu-toggle[data-bs-toggle="dropdown"]' );
+    const toggle = navigation.querySelector( '.menu-toggle[data-bs-toggle="menu"]' );
 
     if( !toggle ){
         return;
@@ -7,11 +7,11 @@ document.querySelectorAll( '.navigation' ).forEach( navigation => {
 
     navigation.classList.add( 'menu-ready' );
 
-    toggle.addEventListener( 'show.bs.dropdown', () => {
+    toggle.addEventListener( 'show.bs.menu', () => {
         toggle.setAttribute( 'aria-label', 'Close navigation menu' );
     } );
 
-    toggle.addEventListener( 'hidden.bs.dropdown', () => {
+    toggle.addEventListener( 'hidden.bs.menu', () => {
         toggle.setAttribute( 'aria-label', 'Open navigation menu' );
     } );
 } );
