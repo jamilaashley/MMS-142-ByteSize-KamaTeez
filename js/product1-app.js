@@ -159,7 +159,7 @@ function showImage( imageIndex ){
     } );
 }
 
-const TO_ADDRESS = "orders@kamateez.com";
+const TO_ADDRESS = "orders@examplewebsite142.com";
 
 const orderButton = document.querySelector('.order-button');
 
