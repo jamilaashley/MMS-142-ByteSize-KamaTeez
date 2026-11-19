@@ -57,7 +57,7 @@ body {
 
 .menu-button:hover,
 .menu-button:focus-visible {
-    filter: brightness(0.9);
+    filter: brightness(.95);
 
 }
 
