@@ -35,43 +35,32 @@
 .main-wrap .product .image-gallery img{
     width: 100%;
 }
-.main-wrap .product .image-gallery img.crossfade-image{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .5s ease;
-}
-.main-wrap .product .image-gallery img.crossfade-image.is-visible{
-    opacity: 1;
-}
-@media (prefers-reduced-motion: reduce){
-    .main-wrap .product .image-gallery img.crossfade-image{
-        transition-duration: 0.01ms;
-    }
-}
 .main-wrap .product .image-gallery .controls{
     position: absolute;
     bottom: 20px;
     left: 50%;
+    right: auto;
     z-index: 2;
     display: flex;
     gap: 10px;
+    width: max-content;
+    margin: 0;
     transform: translateX(-50%);
 }
-.main-wrap .product .image-gallery .controls .btn{
+.main-wrap .product .image-gallery .controls .carousel-indicator{
+    flex: 0 0 10px;
     width: 10px;
     height: 10px;
     padding: 0;
+    margin: 0;
     border: 0;
     border-radius: 50%;
     background: rgba( 255, 255, 255, 0.5 );
     display: inline-block;
     cursor: pointer;
+    opacity: 1;
 }
-.main-wrap .product .image-gallery .controls .btn.active{
+.main-wrap .product .image-gallery .controls .carousel-indicator.active{
     background: #6FB111;
 }
 .main-wrap .product .image-gallery .carousel-arrow{
@@ -89,9 +78,11 @@
     font-size: 16px;
     cursor: pointer;
     transform: translateY(-50%);
+    opacity: 1;
 }
 .main-wrap .product .image-gallery .carousel-arrow:hover{
     background: rgba(0, 0, 0, 0.7);
+    opacity: 1;
 }
 .main-wrap .product .image-gallery .carousel-arrow.previous{
     left: 12px;
@@ -100,7 +91,7 @@
     right: 12px;
 }
 .main-wrap .product .image-gallery .carousel-arrow:focus-visible,
-.main-wrap .product .image-gallery .controls .btn:focus-visible,
+.main-wrap .product .image-gallery .controls .carousel-indicator:focus-visible,
 .main-wrap .product .product-details .purchase-actions button:focus-visible,
 .main-wrap .product .product-details .purchase-actions input:focus-visible{
     outline: 2px solid #6FB111;
