@@ -32,6 +32,10 @@ main {
     width: 85%;
 }
 
+.form-label {
+  color: #EFEFEF;
+}
+
 .image-container {
     flex: 1;
     display: flex;
