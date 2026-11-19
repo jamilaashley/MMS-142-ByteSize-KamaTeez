@@ -26,13 +26,13 @@ body {
 .shop-section {
     padding: 52px 5% 72px;
     background: #242021;
-    color: #EFEFEF;
+    color: #FFFFFF;
     scroll-margin-top: 20px;
 }
 
 .shop-title {
     margin: 0 0 32px;
-    color: #EFEFEF;
+    color: #FFFFFF;
     font-family: 'Freckle Face', cursive;
     font-size: clamp(2.4rem, 5vw, 3.5rem);
     font-weight: 400;
@@ -133,13 +133,13 @@ body {
     width: 35px;
     height: 35px;
     padding: 0;
-    border: 1px solid #EFEFEF;
+    border: 1px solid #FFFFFF;
     appearance: none;
     cursor: pointer;
 }
 
 .recommended-swatch.white {
-    background: #EFEFEF;
+    background: #FFFFFF;
 }
 
 .recommended-swatch.black {
@@ -209,7 +209,7 @@ body {
     align-items: center;
     gap: 12px;
     margin-top: 8px;
-    color: #EFEFEF;
+    color: #FFFFFF;
     font-weight: 400;
     text-decoration: underline;
     text-underline-offset: 4px;
