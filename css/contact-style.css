@@ -1,13 +1,13 @@
 body {
     background-color: #242021;
-    color: #EFEFEF;
+    color: #FFFFFF;
     margin: 0;
     font-family: 'Nunito', sans-serif;
 }
 
 .form-container,
 .contact-form .form-label {
-    color: #EFEFEF;
+    color: #FFFFFF;
 }
 
 .contact-form .form-control {
@@ -33,7 +33,7 @@ main {
 }
 
 .form-label {
-  color: #EFEFEF;
+  color: #FFFFFF;
 }
 
 .image-container {
