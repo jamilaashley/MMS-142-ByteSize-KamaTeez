@@ -93,9 +93,7 @@ p {
     margin-top: 48px;
 }
 
-li + li {
-    margin-top: 8px;
-}
+
 
 h2, h3 {
     margin-bottom: 16px;
