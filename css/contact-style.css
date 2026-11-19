@@ -50,14 +50,15 @@ main {
 }
 
 /* Normal state */
-.btn-primary {
+.btn-solid.theme-primary {
     background-color: #CC3846;
     border-color: #CC3846;
+    color: #fff;
 }
 
 /* Hover state */
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-solid.theme-primary:hover,
+.btn-solid.theme-primary:focus {
     background-color: #B5313E !important;
     border-color: #B5313E !important;
 }
