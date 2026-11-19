@@ -32,7 +32,7 @@ p {
     margin: 32px;
 }
 
-.menu {
+.policy-menu {
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -108,7 +108,7 @@ h2, h3 {
         margin: 16px;
     }
 
-    .menu {
+    .policy-menu {
         flex: none;
         width: 100%;
     }
