@@ -26,13 +26,13 @@ body {
 .shop-section {
     padding: 52px 5% 72px;
     background: #242021;
-    color: #fff;
+    color: #EFEFEF;
     scroll-margin-top: 20px;
 }
 
 .shop-title {
     margin: 0 0 32px;
-    color: #fff;
+    color: #EFEFEF;
     font-family: 'Freckle Face', cursive;
     font-size: clamp(2.4rem, 5vw, 3.5rem);
     font-weight: 400;
@@ -133,13 +133,13 @@ body {
     width: 35px;
     height: 35px;
     padding: 0;
-    border: 1px solid #fff;
+    border: 1px solid #EFEFEF;
     appearance: none;
     cursor: pointer;
 }
 
 .recommended-swatch.white {
-    background: #fff;
+    background: #EFEFEF;
 }
 
 .recommended-swatch.black {
@@ -151,7 +151,7 @@ body {
 }
 
 .recommended-swatch[aria-pressed="true"] {
-    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #fff;
+    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #EFEFEF;
 }
 
 .recommended-swatch:focus-visible,
@@ -164,7 +164,7 @@ body {
 .about-section {
     padding: 72px 5%;
     background: #cc3846;
-    color: #fff;
+    color: #EFEFEF;
     scroll-margin-top: 20px;
 }
 
@@ -209,7 +209,7 @@ body {
     align-items: center;
     gap: 12px;
     margin-top: 8px;
-    color: #fff;
+    color: #EFEFEF;
     font-weight: 400;
     text-decoration: underline;
     text-underline-offset: 4px;
