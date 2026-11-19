@@ -1,264 +1,554 @@
-const image = document.getElementById( 'productImg' );
-const nextImage = document.getElementById( 'productImgNext' );
-const controls = document.querySelector( '.image-gallery .controls' );
-const previousButton = document.querySelector( '.image-gallery .previous' );
-const nextButton = document.querySelector( '.image-gallery .next' );
-const colorInputs = document.querySelectorAll( '.select-color input[name="color"]' );
-const quantityInput = document.getElementById( 'quantity' );
-const decreaseQuantity = document.querySelector( '.quantity-decrease' );
-const increaseQuantity = document.querySelector( '.quantity-increase' );
-const shippingToggle = document.querySelector( '.shipping-toggle' );
-const shippingInformation = document.getElementById( 'shipping-information' );
-const recommendedSwatches = document.querySelectorAll( '.recommended-swatch[data-image]' );
-const recommendationImageStates = new WeakMap();
-const recommendationFadeDuration = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ? 0 : 700;
-const imageGallery = document.querySelector( '.image-gallery' );
-const images = imageGallery.dataset.images.split( ',' ).map( imagePath => imagePath.trim() );
-const indicators = images.map( ( _, index ) => {
-    const button = document.createElement( 'button' );
-    button.type = 'button';
-    button.className = 'btn';
-    button.setAttribute( 'aria-label', `Show product image ${ index + 1 }` );
-    button.addEventListener( 'click', () => showImage( index ) );
-    controls.appendChild( button );
-    return button;
-} );
-let currentImage = 0;
-let imageRequest = 0;
-
-function showImage( index ){
-    currentImage = ( index + images.length ) % images.length;
-    const imageSrc = images[ currentImage ];
-    const imageAlt = `Product image ${ currentImage + 1 }`;
-    const request = ++imageRequest;
-
-    nextImage.style.transition = 'none';
-    nextImage.classList.remove( 'is-visible' );
-    void nextImage.offsetWidth;
-    nextImage.style.transition = '';
-
-    if( image.getAttribute( 'src' ) !== imageSrc ){
-        const startCrossfade = () => {
-            if(
-                request === imageRequest &&
-                nextImage.getAttribute( 'src' ) === imageSrc &&
-                nextImage.complete &&
-                nextImage.naturalWidth > 0
-            ){
-                requestAnimationFrame( () => {
-                    if( request === imageRequest && nextImage.getAttribute( 'src' ) === imageSrc ){
-                        nextImage.classList.add( 'is-visible' );
-                    }
-                } );
-            }
-        };
-
-        nextImage.alt = imageAlt;
-        nextImage.onload = startCrossfade;
-        nextImage.onerror = () => {
-            if( request === imageRequest ){
-                console.error( `Unable to load product image: ${ imageSrc }` );
-            }
-        };
-        nextImage.src = imageSrc;
-
-        if( nextImage.complete && nextImage.naturalWidth > 0 ){
-            startCrossfade();
-        }
-    }
-
-    indicators.forEach( ( indicator, indicatorIndex ) => {
-        const isActive = indicatorIndex === currentImage;
-        indicator.classList.toggle( 'active', isActive );
-        indicator.setAttribute( 'aria-current', isActive ? 'true' : 'false' );
-    } );
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+.main-wrap{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #242021;
+    padding: 40px 0 24px;
+}
+.main-wrap .product{
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    align-items: stretch;
+    gap: 50px;
+}
+.main-wrap .product .image-gallery{
+    flex-basis: 44%;
+    background: #242021;
+    box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(50px) scale(1);
+    position: relative;
+    overflow: hidden;
 }
 
-nextImage.addEventListener( 'transitionend', event => {
-    if( event.propertyName !== 'opacity' || !nextImage.classList.contains( 'is-visible' ) ){
-        return;
-    }
-
-    image.src = nextImage.getAttribute( 'src' );
-    image.alt = nextImage.alt;
-    nextImage.style.transition = 'none';
-    nextImage.classList.remove( 'is-visible' );
-    void nextImage.offsetWidth;
-    nextImage.style.transition = '';
-} );
-
-previousButton.addEventListener( 'click', () => showImage( currentImage - 1 ) );
-nextButton.addEventListener( 'click', () => showImage( currentImage + 1 ) );
-colorInputs.forEach( input => {
-    input.addEventListener( 'change', () => showImage( Number( input.dataset.image ) - 1 ) );
-} );
-decreaseQuantity.addEventListener( 'click', () => {
-    if( Number( quantityInput.value ) > Number( quantityInput.min ) ){
-        quantityInput.stepDown();
-    }
-} );
-increaseQuantity.addEventListener( 'click', () => quantityInput.stepUp() );
-shippingToggle.addEventListener( 'click', () => {
-    const isExpanded = shippingToggle.getAttribute( 'aria-expanded' ) === 'true';
-    shippingToggle.setAttribute( 'aria-expanded', String( !isExpanded ) );
-    shippingInformation.hidden = isExpanded;
-} );
-recommendedSwatches.forEach( swatch => {
-    swatch.addEventListener( 'click', () => {
-        const product = swatch.closest( '.recommended-product' );
-        const productImage = product.querySelector( '.recommended-product-image' );
-        let state = recommendationImageStates.get( product );
-
-        if( !state ){
-            state = {
-                originalSrc: productImage.getAttribute( 'src' ),
-                originalAlt: productImage.alt,
-                timer: null,
-                transitionTimer: null,
-                request: 0
-            };
-            recommendationImageStates.set( product, state );
-        }
-
-        window.clearTimeout( state.timer );
-        window.clearTimeout( state.transitionTimer );
-        const request = ++state.request;
-        const productName = product.querySelector( 'h3' ).textContent.trim();
-
-        product.querySelectorAll( '.recommended-swatch' ).forEach( productSwatch => {
-            productSwatch.setAttribute( 'aria-pressed', String( productSwatch === swatch ) );
-        } );
-
-        crossfadeRecommendedImage(
-            product,
-            productImage,
-            swatch.dataset.image,
-            `${ swatch.dataset.color } ${ productName }`,
-            state,
-            request,
-            () => {
-                state.timer = window.setTimeout( () => {
-                    if( state.request !== request ){
-                        return;
-                    }
-
-                    crossfadeRecommendedImage(
-                        product,
-                        productImage,
-                        state.originalSrc,
-                        state.originalAlt,
-                        state,
-                        request,
-                        () => {
-                            state.timer = null;
-                            product.querySelectorAll( '.recommended-swatch' ).forEach( productSwatch => {
-                                productSwatch.setAttribute( 'aria-pressed', 'false' );
-                            } );
-                        }
-                    );
-                }, 5000 );
-            }
-        );
-    } );
-} );
-
-function crossfadeRecommendedImage( product, productImage, imageSrc, imageAlt, state, request, onComplete ){
-    const imageFrame = product.querySelector( '.recommended-image' );
-    const existingOutgoingImage = imageFrame.querySelector( '.recommended-image-outgoing' );
-
-    if( existingOutgoingImage ){
-        existingOutgoingImage.remove();
-    }
-
-    const outgoingImage = productImage.cloneNode( false );
-    outgoingImage.className = 'recommended-image-outgoing';
-    outgoingImage.alt = '';
-    outgoingImage.removeAttribute( 'loading' );
-    outgoingImage.setAttribute( 'aria-hidden', 'true' );
-    outgoingImage.src = productImage.currentSrc || productImage.src;
-    imageFrame.appendChild( outgoingImage );
-
-    const incomingImage = new Image();
-    incomingImage.onload = () => {
-        if( state.request !== request ){
-            outgoingImage.remove();
-            return;
-        }
-
-        productImage.src = imageSrc;
-        productImage.alt = imageAlt;
-        requestAnimationFrame( () => {
-            if( state.request !== request ){
-                outgoingImage.remove();
-                return;
-            }
-
-            outgoingImage.classList.add( 'is-fading' );
-            state.transitionTimer = window.setTimeout( () => {
-                if( state.request !== request ){
-                    return;
-                }
-
-                outgoingImage.remove();
-                state.transitionTimer = null;
-                onComplete();
-            }, recommendationFadeDuration );
-        } );
-    };
-    incomingImage.onerror = () => {
-        outgoingImage.remove();
-        console.error( `Unable to load recommendation image: ${ imageSrc }` );
-    };
-    incomingImage.src = imageSrc;
+.main-wrap .product .image-gallery img{
+    width: 100%;
 }
-
-showImage( currentImage );
-
-const TO_ADDRESS = "orders@examplewebsite142.com";
-
-const orderButton = document.querySelector('.order-button');
-
-const productName = document.querySelector('.details h2').textContent;
-const productPrice = document.querySelector('.details h3').textContent;
-
-function buildOrderEmail() {
-    const selectedSize = document.querySelector('input[name="size"]:checked');
-    const selectedColor = document.querySelector('input[name="color"]:checked');
-
-    if (selectedSize === null || selectedColor === null) {
-        alert("Please select a size and color.");
-        return null;
-    }
-
-    const size = selectedSize.id;
-    const color = selectedColor.id;
-    const quantity = quantityInput.value;
-
-    const subject = "Order Request - " + productName;
-
-    const body =
-        "Hello!\r\n\r\n" +
-        "This is my order details:\r\n\r\n" +
-        "Product: " + productName + "\r\n" +
-        "Price: " + productPrice + "\r\n" +
-        "Color: " + color + "\r\n" +
-        "Size: " + size + "\r\n" +
-        "Quantity: " + quantity + "\r\n\r\n" +
-        "Thank you.";
-
-    return (
-        "https://outlook.live.com/mail/0/deeplink/compose?to=" + TO_ADDRESS +
-        "&subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body)
-    );
+.main-wrap .product .image-gallery .controls{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    width: max-content;
+    margin: 0;
+    transform: translateX(-50%);
 }
-
-orderButton.addEventListener('click', function () {
-    const emailLink = buildOrderEmail();
-
-    if (emailLink === null) {
-        return;
+.main-wrap .product .image-gallery .controls .carousel-indicator{
+    flex: 0 0 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba( 255, 255, 255, 0.5 );
+    display: inline-block;
+    cursor: pointer;
+    opacity: 1;
+}
+.main-wrap .product .image-gallery .controls .carousel-indicator.active{
+    background: #6FB111;
+}
+.main-wrap .product .image-gallery .carousel-arrow{
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    opacity: 1;
+}
+.main-wrap .product .image-gallery .carousel-arrow:hover{
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+}
+.main-wrap .product .image-gallery .carousel-arrow.previous{
+    left: 12px;
+}
+.main-wrap .product .image-gallery .carousel-arrow.next{
+    right: 12px;
+}
+.main-wrap .product .image-gallery .carousel-arrow:focus-visible,
+.main-wrap .product .image-gallery .controls .carousel-indicator:focus-visible,
+.main-wrap .product .product-details .purchase-actions button:focus-visible,
+.main-wrap .product .product-details .purchase-actions input:focus-visible{
+    outline: 2px solid #6FB111;
+    outline-offset: 3px;
+}
+.main-wrap .product .product-details{
+    flex-basis: 56%;
+    background: transparent;
+    padding: 0 30px 40px 40px;
+    transform: translate(31px, 43px) scale(1.08);
+}
+.main-wrap .product .product-details .details{
+    margin-bottom: 20px;
+}
+.main-wrap .product .product-details .details h2{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    color: #fff;
+}
+.main-wrap .product .product-details .details h3{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    color: #F583DD;
+}
+.main-wrap .product .product-details .sizes{
+    margin-bottom: 20px;
+}
+.main-wrap .product .product-details .sizes .form .select-size{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+.main-wrap .product .product-details .sizes .form .select-size h3{
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+}
+.main-wrap .product .product-details .sizes .form .select-size .size-options{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.main-wrap .product .product-details .sizes .form .select-size label{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.main-wrap .product .product-details .sizes .form .select-size label input,
+.main-wrap .product .product-details .colors .form .select-color label input{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+.main-wrap .product .product-details .sizes .form .select-size label span{
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid #B8B8B8;
+    background: #EFEFEF;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #242021;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+.main-wrap .product .product-details .sizes .form .select-size label input:checked + span{
+    background: #CC3846;
+    color: #fff;
+}
+.main-wrap .product .product-details .colors{
+    margin-bottom: 20px;
+}
+.main-wrap .product .product-details .colors .form .select-color{
+    display: flex;
+    align-items: center;
+}
+.main-wrap .product .product-details .colors .form .select-color label{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.main-wrap .product .product-details .colors .form .select-color span{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #fff;
+    margin-right: 8px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+.main-wrap .product .product-details .colors .form .select-color .color-1{
+    background: #ffffff;
+}
+.main-wrap .product .product-details .colors .form .select-color .color-2{
+    background: #000000;
+}
+.main-wrap .product .product-details .colors .form .select-color .color-3{
+    background: #E2C9B7;
+}
+.main-wrap .product .product-details .colors .form .select-color label input:checked + span{
+    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #fff;
+}
+.main-wrap .product .product-details .sizes .form .select-size label input:focus-visible + span,
+.main-wrap .product .product-details .colors .form .select-color label input:focus-visible + span{
+    outline: 3px solid #F583DD;
+    outline-offset: 3px;
+}
+.main-wrap .product .product-details .purchase-actions{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+.main-wrap .product .product-details .quantity-stepper{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background: #EFEFEF;
+    border-radius: 0px;
+}
+.main-wrap .product .product-details .quantity-stepper button{
+    width: 50px;
+    height: 70px;
+    border: 0;
+    background: #EFEFEF;
+    color: #242021;
+    font-size: 20px;
+    cursor: pointer;
+}
+.main-wrap .product .product-details .quantity-stepper button:hover{
+    background: #D2D2D2;
+}
+.main-wrap .product .product-details .quantity-stepper input{
+    width: 36px;
+    padding: 0;
+    border: 0 solid #C5C5C5;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    background: transparent;
+    color: #242021;
+    font-size: 20px;
+    text-align: center;
+    appearance: textfield;
+}
+.main-wrap .product .product-details .quantity-stepper input::-webkit-inner-spin-button,
+.main-wrap .product .product-details .quantity-stepper input::-webkit-outer-spin-button{
+    margin: 0;
+    appearance: none;
+}
+.main-wrap .product .product-details .order-button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 70px;
+    padding: 0 60px;
+    border: 0;
+    border-radius: 0px;
+    background: #F583DD;
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.main-wrap .product .product-details .order-button:hover{
+    filter: brightness(.95);
+}
+.main-wrap .product .product-details .order-button svg{
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+.main-wrap .product .product-details .shipping-dropdown{
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+.main-wrap .product .product-details .shipping-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 85.5%;
+    min-height: 70px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 0;
+    background: #CC3846;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    transform: translateX(-34px);
+}
+.main-wrap .product .product-details .shipping-label{
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.main-wrap .product .product-details .shipping-toggle:hover{
+    filter: brightness(.95);
+}
+.main-wrap .product .product-details .shipping-chevron{
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .2s ease;
+}
+.main-wrap .product .product-details .shipping-toggle[aria-expanded="true"] .shipping-chevron{
+    transform: rotate(225deg);
+}
+.main-wrap .product .product-details .shipping-information{
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 8px);
+    left: 34%;
+    width: min(395px, calc(100vw - 32px));
+    padding: 16px;
+    background: #EFEFEF;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .3);
+    transform: translateX(-40%);
+}
+.main-wrap .product .product-details .shipping-information p + p{
+    margin-top: 14px;
+}
+.main-wrap .product .product-details .shipping-heading{
+    font-size: 16px;
+}
+.main-wrap .product .product-details .shipping-toggle:focus-visible{
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+.product-information{
+    padding: 56px 5% 0;
+    background: #242021;
+    color: #fff;
+}
+.product-information-content{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.information-block + .information-block{
+    margin-top: 56px;
+    transform: translateY(-40px);
+}
+.information-block h2{
+    margin-bottom: 20px;
+    font-family: 'Freckle Face', cursive;
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    transform: translateY(-50%);
+}
+.information-block img{
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: translateY(-20px);
+}
+.recommendations{
+    padding: 16px 5% 72px;
+    background: #242021;
+    color: #fff;
+}
+.recommendations-content{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.recommendations h2{
+    margin-bottom: 28px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+}
+.recommended-products{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 700px;
+    gap: 16px;
+    margin: 0 auto;
+}
+.recommended-image{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+.recommended-product-image{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.recommended-image-outgoing{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity .7s ease;
+}
+.recommended-image-outgoing.is-fading{
+    opacity: 0;
+}
+.recommended-product-info{
+    width: 90%;
+    padding-top: 16px;
+    margin: 0 auto;
+}
+.recommended-product-title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    color: inherit;
+    text-decoration: none;
+}
+.recommended-product-title:hover h3{
+    text-decoration: underline;
+}
+.recommended-product-title:focus-visible{
+    outline: 2px solid #F583DD;
+    outline-offset: 4px;
+}
+.recommended-product-title h3{
+    font-size: 20px;
+    font-weight: 400;
+}
+.recommended-product-title svg{
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #F583DD;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+.recommended-product-price{
+    margin-top: 8px;
+    color: #F583DD;
+    font-size: 16px;
+}
+.recommended-colors{
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+.recommended-swatch{
+    display: block;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: 1px solid #fff;
+    cursor: pointer;
+    appearance: none;
+}
+.recommended-swatch.white{
+    background: #fff;
+}
+.recommended-swatch.black{
+    background: #000;
+}
+.recommended-swatch.khaki{
+    background: #E2C9B7;
+}
+.recommended-swatch[aria-pressed="true"]{
+    box-shadow: 0 0 0 2px #242021, 0 0 0 3px #fff;
+}
+.recommended-swatch:focus-visible{
+    outline: 2px solid #F583DD;
+    outline-offset: 3px;
+}
+@media (max-width: 600px){
+    .recommended-products{
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
-
-    window.location.href = emailLink;
-});
+}
+@media (prefers-reduced-motion: reduce){
+    .recommended-image-outgoing{
+        transition-duration: .01ms;
+    }
+}
+@media (max-width: 1000px){
+    .main-wrap .product{
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 560px;
+        gap: 32px;
+    }
+    .main-wrap .product .image-gallery{
+        flex: 0 0 auto;
+        width: 100%;
+        background: transparent;
+        box-shadow: none;
+        transform: none;
+    }
+    .main-wrap .product .image-gallery img{
+        display: block;
+    }
+    .main-wrap .product .product-details{
+        flex: 0 0 auto;
+        width: 100%;
+        padding: 0 16px 24px;
+        transform: none;
+    }
+    .main-wrap .product .product-details .purchase-actions{
+        width: 100%;
+        align-items: stretch;
+    }
+    .main-wrap .product .product-details .quantity-stepper{
+        flex: 0 0 auto;
+    }
+    .main-wrap .product .product-details .order-button{
+        flex: 1 1 200px;
+        min-width: 0;
+        padding: 0 18px;
+    }
+    .main-wrap .product .product-details .sizes .form .select-size .size-options{
+        flex-wrap: wrap;
+    }
+    .main-wrap .product .product-details .shipping-toggle{
+        width: 100%;
+        transform: none;
+    }
+    .main-wrap .product .product-details .shipping-information{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
