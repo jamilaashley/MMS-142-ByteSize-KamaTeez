@@ -158,3 +158,52 @@ function showImage( imageIndex ){
         }
     } );
 }
+
+const TO_ADDRESS = "orders@kamateez.com";
+
+const orderButton = document.querySelector('.order-button');
+
+const productName = document.querySelector('.details h2').textContent;
+const productPrice = document.querySelector('.details h3').textContent;
+
+function buildOrderEmail() {
+    const selectedSize = document.querySelector('input[name="size"]:checked');
+    const selectedColor = document.querySelector('input[name="color"]:checked');
+
+    if (selectedSize === null || selectedColor === null) {
+        alert("Please select a size and color.");
+        return null;
+    }
+
+    const size = selectedSize.id;
+    const color = selectedColor.id;
+    const quantity = quantityInput.value;
+
+    const subject = "Order Request - " + productName;
+
+    const body =
+        "Hello!\r\n\r\n" +
+        "This is my order details:\r\n\r\n" +
+        "Product: " + productName + "\r\n" +
+        "Price: " + productPrice + "\r\n" +
+        "Color: " + color + "\r\n" +
+        "Size: " + size + "\r\n" +
+        "Quantity: " + quantity + "\r\n\r\n" +
+        "Thank you.";
+
+    return (
+        "https://outlook.live.com/mail/0/deeplink/compose?to=" + TO_ADDRESS +
+        "&subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body)
+    );
+}
+
+orderButton.addEventListener('click', function () {
+    const emailLink = buildOrderEmail();
+
+    if (emailLink === null) {
+        return;
+    }
+
+    window.location.href = emailLink;
+});
