@@ -90,8 +90,6 @@ body {
 }
 
 
-
-
 @media (max-width: 700px) {
     .button-layout {
         flex-direction: column;
